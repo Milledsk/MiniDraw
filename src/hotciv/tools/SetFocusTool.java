@@ -54,6 +54,7 @@ public class SetFocusTool extends AbstractTool implements Tool{
 
     @Override
     public void mouseUp(MouseEvent e, int x, int y){
+        game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
         fChild.mouseUp(e, x, y);
     }
 }

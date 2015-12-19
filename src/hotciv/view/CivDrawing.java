@@ -100,6 +100,18 @@ public class CivDrawing
         Unit unit = game.getUnitAt(p);
         City city = game.getCityAt(p);
 
+          if ( city != null ) {
+
+              Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()),
+                      GfxConstants.getYFromRow(p.getRow()) );
+              CityFigure cityFigure = new CityFigure(city, point);
+              cityFigure.addFigureChangeListener(this);
+              cityMap.put(city, cityFigure);
+
+
+              delegate.add(cityFigure);
+          }
+
         if ( unit != null ) {
           String type = unit.getTypeString();
           // convert the unit's Position to (x,y) coordinates
@@ -111,18 +123,6 @@ public class CivDrawing
           figureMap.put(unit, unitFigure);
 
           delegate.add(unitFigure);
-        }
-
-        if ( city != null ) {
-
-          Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()),
-                  GfxConstants.getYFromRow(p.getRow()) );
-          CityFigure cityFigure = new CityFigure(city, point);
-          cityFigure.addFigureChangeListener(this);
-          cityMap.put(city, cityFigure);
-
-
-          delegate.add(cityFigure);
         }
 
 
@@ -211,6 +211,8 @@ public class CivDrawing
     ageText = new TextFigure("Age: " + game.getAge(), new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
     delegate.add(ageText);
 
+
+
   }
 
   public void tileFocusChangedAt(Position position) {
@@ -237,8 +239,6 @@ public class CivDrawing
       delegate.remove(unitIcon);
       unitIcon = new ImageFigure(unit.getTypeString(), new Point(GfxConstants.UNIT_ICON_X, GfxConstants.UNIT_ICON_Y));
       delegate.add(unitIcon);
-
-
     }
 
     //City: PlayerShield, WorkforceFocus and cityProduction.
@@ -259,6 +259,8 @@ public class CivDrawing
       delegate.remove(cityProduction);
       cityProduction = new ImageFigure(city.getProduction(), new Point(GfxConstants.CITY_PRODUCTION_X, GfxConstants.CITY_PRODUCTION_Y));
       delegate.add(cityProduction);
+
+        System.out.println("Byen har: " + city.getProductionTreasury());
     }
 
   }

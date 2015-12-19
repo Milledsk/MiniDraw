@@ -2,6 +2,8 @@ package hotciv.visual;
 
 import hotciv.standard.GameImpl;
 import hotciv.standard.factories.AlphaCivFactory;
+import hotciv.standard.factories.SemiCivFactory;
+import hotciv.standard.strategies.RandomDieStrategy;
 import hotciv.tools.SetFocusTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
@@ -33,7 +35,7 @@ import hotciv.stub.*;
 public class ShowSetFocus {
   
   public static void main(String[] args) {
-    Game game = new GameImpl(new AlphaCivFactory());
+    Game game = new GameImpl(new SemiCivFactory(new RandomDieStrategy()));
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Click any tile to set focus",  

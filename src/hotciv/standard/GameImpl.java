@@ -90,6 +90,10 @@ public class GameImpl implements Game {
 
     public boolean moveUnit(Position from, Position to) {
 
+        if(from.equals(to)){
+            return false;
+        }
+
         if(Math.abs(from.getColumn() - to.getColumn()) > 1 || Math.abs(from.getRow() - to.getRow()) > 1 ) {
             return false;
         }
@@ -108,7 +112,12 @@ public class GameImpl implements Game {
         }
 
         if(!(world.getUnitAt(to) == null)){
-            return attack(from, to);
+            if(world.getUnitAt(to).getOwner().equals(Player.RED)){
+                return false;
+            } else{
+                return attack(from, to);
+            }
+
         }
 
         else{
@@ -213,7 +222,9 @@ public class GameImpl implements Game {
                         Iterator<Position> neighborLocations = Utility.get8NeighborhoodIterator(p);
                         while(neighborLocations.hasNext()) {
                             Position position = neighborLocations.next();
-                            if(world.getUnitAt(position) == null){
+                            if(world.getUnitAt(position) == null &&
+                                    !(world.getTileAt(position).getTypeString().equals(GameConstants.MOUNTAINS)) &&
+                                            !(world.getTileAt(position).getTypeString().equals(GameConstants.OCEANS))){
                                 world.setUnitAt(position, unit);
                                 break;
                             }
