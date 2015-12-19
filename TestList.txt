@@ -1,0 +1,121 @@
+1) Quickly write a test
+2) See the new test fail
+3) Make a little change
+4) See the new test succeed
+5) refactor
+(6)) commit and push
+
+TestList
+
+
+[x] Player in turn is Red at game start
+[x] After Red has been in turn, Blue is in turn
+[x] After Blue has been in turn, Red is in turn
+[x] Two players: Red, Blue
+[x] World age is 4000 BC before game start
+[x] After one round age is 3900 BC
+[x] After one turn age is still 4000 BC
+[x] Ocean at (1,0)
+[x] Hill at (0,1)
+[x] Mountains at (2,2)
+[x] Plains everywhere else
+[x] Red wins in year 3000 BC
+[x] Null wins in year 3900 BC
+[x] Red city at (1,1)
+[x] Blue city at (4,1)
+[x] Red has a archer at (2,0)
+[x] Blue has a legion at (3,2)
+[x] Red has a settler at (4,3)
+[x] Move archer from 2,0 and place archer at 2,1 - (use the MoveUnit method. Returns a boolean. True if moved, false else.)
+[x] Must be denied to move on ocean
+[x] Must be denied to move on mountain
+[x] Blue should defeat red if it moves to 3,3 after red has moved to 3,3
+[x] The attacker wins
+[x] Units may only move one tile per round
+[x] Only one unit is allowed on a tile at a time
+
+[x] Cities has a population of 1.
+[x] blueCity at 4,1 produces 6 after first round
+[x] blueCity at 4,1 has 0 production at game start
+[x] A player may select to produce either an archer, legion or settler
+[x] An Archer costs 10
+[x] A Legion costs 15
+[x] A Settler costs 30
+[x] Cities has a population of 1.
+[x] redCity at (1,1) produces 6 after first round
+[x] Red cannot move blue units.
+[x] A unit can only be moved one time pr. round.
+[x] If red unit moves to blue city, the city then turns red.
+[X] Blue should not be able to move a red unit.
+
+
+[ ] When a city has enough production it produces the chosen unit. Brug: ChangeProductionInCityAt(position, unit)
+[x] When a city has produced a unit, the cost is deduced from the treasury of production.
+[ ] The produces unit is placed on the city-tile if free,
+    otherwise it's i placed on the first non-occupied adjacent tile starting from north and clockwise.
+
+BetaCiv
+[x] In round 2 the year is 3800 BC
+[x] In round 40 the year is 1 BC
+[x] In round 41 the year is 1 AC
+[x] In round 42 the year is 50 AC
+[x] In round 43 the year is 100 AC
+[x] In round 77 the year is 1775 AC
+[x] In round 83 the year is 1905 AC
+[x] In round 98 the year is 1971 AC
+
+[x] red wins if it conquors bluecity
+[x] The winner in the game is the player that first conquers all cities in the world
+
+GammaCiv
+
+[x] When a red settler is told to perform its action (build city), the settler
+    unit itself is removed from the world replaced by a red city of population size
+    one.
+[x] When an archer is told to fortify, its defensive strength is doubled, however, it cannot be moved.
+[x] If an archer is already fortified, invoking this action removes its fortification.
+
+DeltaCiv
+
+[x] Red city at 8, 12
+[x] Blue city at 4,5
+[x] Ocean at 0,0
+
+EpsilonCiv
+[x] Archer attack strength is 2
+[x] Legion attack strength is 4
+[x] Settler attack strength is 0
+[x] Legions defence strength is 2
+[x] Archer defense strength is 3
+[x] Settler defense strength is 3
+
+[X] Red legion attacks blue settler
+[X] Red wins the game after three successful attacks
+[X] A legion with two adjacent friendly units (4+1+1) * 3 = 18
+[X] Red settler attack blue legion and loses.
+[X] Test if a tile equals hill or forest with value 2.
+
+ZetaCiv
+[] Should return 0 in count attacks prior to the 20th round
+[X] Red conquers a blue city after 20 rounds but does not win
+[X] Red conquers the last blue city within the 20th round
+[X] Red is not the winner in round 22 after three successful attacks.
+[X] Red wins in round 23 with third successful attack in a row
+
+ThetaCiv
+[] Create a factory to handle ThetaCiv
+[X] Create a chariot for ThetaCiv
+[X] A chariot costs 20 in production.
+[x] A chariot has 3 in attack strength
+[X] A chariot has 1 in defense strength
+[] Make a chariot fortify
+
+decorator to check if the unit that calls the action strategy is a chariot
+if it is a chariot use the same action as the archer, else use GammeCivActionStratety
+
+
+----------------------------
+Hold IT,1:
+Mille Knudsen
+Mark Flarup
+Christian Nordstrøm

@@ -35,7 +35,7 @@ import hotciv.stub.*;
 public class ShowSetFocus {
   
   public static void main(String[] args) {
-    Game game = new GameImpl(new SemiCivFactory(new RandomDieStrategy()));
+    Game game = new GameImpl(new AlphaCivFactory());
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Click any tile to set focus",  
