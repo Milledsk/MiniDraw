@@ -1,5 +1,10 @@
 package hotciv.visual;
 
+import hotciv.standard.GameImpl;
+import hotciv.standard.factories.AlphaCivFactory;
+import hotciv.standard.factories.SemiCivFactory;
+import hotciv.standard.strategies.randomDieStrategy;
+import hotciv.tools.MoveUnitTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
 
@@ -30,7 +35,7 @@ import hotciv.stub.*;
 public class ShowMove {
   
   public static void main(String[] args) {
-    Game game = new StubGame2();
+    Game game = new GameImpl(new AlphaCivFactory());
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Move any unit using the mouse",  
@@ -39,6 +44,6 @@ public class ShowMove {
     editor.showStatus("Move units to see Game's moveUnit method being called.");
 
     // Replace the setting of the tool with your UnitMoveTool implementation.
-    editor.setTool( new SelectionTool(editor) );
+    editor.setTool( new MoveUnitTool(editor, game) );
   }
 }

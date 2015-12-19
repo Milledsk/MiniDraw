@@ -1,5 +1,8 @@
 package hotciv.visual;
 
+import hotciv.standard.GameImpl;
+import hotciv.standard.factories.AlphaCivFactory;
+import hotciv.tools.SetFocusTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
 
@@ -30,7 +33,7 @@ import hotciv.stub.*;
 public class ShowSetFocus {
   
   public static void main(String[] args) {
-    Game game = new StubGame2();
+    Game game = new GameImpl(new AlphaCivFactory());
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Click any tile to set focus",  
@@ -39,6 +42,6 @@ public class ShowSetFocus {
     editor.showStatus("Click a tile to see Game's setFocus method being called.");
 
     // Replace the setting of the tool with your SetFocusTool implementation.
-    editor.setTool( new SelectionTool(editor) );
+    editor.setTool( new SetFocusTool(editor, game) );
   }
 }

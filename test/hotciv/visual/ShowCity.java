@@ -102,4 +102,9 @@ class CityStub implements City {
   public String getWorkforceFocus() {
     return null;
   }
+
+  @Override
+  public int getProductionTreasury() {
+    return 0;
+  }
 }

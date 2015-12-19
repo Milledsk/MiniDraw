@@ -138,6 +138,11 @@ public class StubGame2 implements Game {
     System.out.println(" *** IMPLEMENTATION PENDING ***");
   }
 
+  @Override
+  public World getWorld() {
+    return null;
+  }
+
 }
 
 class StubUnit implements  Unit {
@@ -152,4 +157,14 @@ class StubUnit implements  Unit {
   public int getMoveCount() { return 1; }
   public int getDefensiveStrength() { return 0; }
   public int getAttackingStrength() { return 0; }
+
+  @Override
+  public boolean getMovable() {
+    return false;
+  }
+
+  @Override
+  public int getCost() {
+    return 0;
+  }
 }
