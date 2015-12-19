@@ -18,46 +18,46 @@ public class TestThetaCiv {
     Game game;
 
     @Before
-    public void setup(){
+    public void setup() {
         game = new GameImpl(new ThetaCivFactory());
 
     }
 
     @Test
-    public void createRedChariot(){
-        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl)game).getUnitConstantsStrategy());
+    public void createRedChariot() {
+        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl) game).getUnitConstantsStrategy());
         assertThat(chariot.getTypeString(), is(ThetaCivGameConstants.CHARIOT));
     }
 
     @Test
-    public void redChariotHasAttackStrengthOf3(){
-        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl)game).getUnitConstantsStrategy());
+    public void redChariotHasAttackStrengthOf3() {
+        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl) game).getUnitConstantsStrategy());
         assertThat(chariot.getAttackingStrength(), is(3));
     }
 
     @Test
-    public void redChariotHasDefensiveStrengthOf1(){
-        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl)game).getUnitConstantsStrategy());
+    public void redChariotHasDefensiveStrengthOf1() {
+        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl) game).getUnitConstantsStrategy());
         assertThat(chariot.getDefensiveStrength(), is(1));
     }
 
     @Test
-    public void redChariotCost20Production(){
-        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl)game).getUnitConstantsStrategy());
+    public void redChariotCost20Production() {
+        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl) game).getUnitConstantsStrategy());
         assertThat(chariot.getCost(), is(20));
     }
 
     @Test
-    public void produceRedChariotAtCityAt1x1(){
-        game.changeProductionInCityAt(new Position(1,1), ThetaCivGameConstants.CHARIOT);
+    public void produceRedChariotAtCityAt1x1() {
+        game.changeProductionInCityAt(new Position(1, 1), ThetaCivGameConstants.CHARIOT);
         endOfRound(4);
-        assertThat(game.getUnitAt(new Position(1,1)).getTypeString(), is(ThetaCivGameConstants.CHARIOT));
+        assertThat(game.getUnitAt(new Position(1, 1)).getTypeString(), is(ThetaCivGameConstants.CHARIOT));
     }
 
     @Test
-    public void chariotFortifiesAndGetsDefensiveStrengthOf2(){
-        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl)game).getUnitConstantsStrategy());
-        Position chariotPostion = new Position(5,5);
+    public void chariotFortifiesAndGetsDefensiveStrengthOf2() {
+        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl) game).getUnitConstantsStrategy());
+        Position chariotPostion = new Position(5, 5);
         World world = game.getWorld();
         world.setUnitAt(chariotPostion, chariot);
         game.performUnitActionAt(chariotPostion);
@@ -66,9 +66,9 @@ public class TestThetaCiv {
     }
 
     @Test
-    public void chariotFortifiesAndGetsDefensiveStrengthOf1(){
-        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl)game).getUnitConstantsStrategy());
-        Position chariotPostion = new Position(5,5);
+    public void chariotFortifiesAndGetsDefensiveStrengthOf1() {
+        Unit chariot = new UnitImpl(Player.RED, ThetaCivGameConstants.CHARIOT, ((GameImpl) game).getUnitConstantsStrategy());
+        Position chariotPostion = new Position(5, 5);
         World world = game.getWorld();
         world.setUnitAt(chariotPostion, chariot);
         game.performUnitActionAt(chariotPostion);
@@ -78,13 +78,12 @@ public class TestThetaCiv {
         assertThat(chariot.getDefensiveStrength(), is(1));
     }
 
-    public void endOfRound(int rounds){
-        for(int i = 0; i < rounds; i++){
+    public void endOfRound(int rounds) {
+        for (int i = 0; i < rounds; i++) {
             game.endOfTurn();
             game.endOfTurn();
         }
     }
-
 
 
 }

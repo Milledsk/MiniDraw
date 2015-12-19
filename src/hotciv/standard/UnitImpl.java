@@ -17,6 +17,7 @@ public class UnitImpl implements Unit {
     private int defensiveStrength;
     private boolean isFortified = false;
     private UnitConstantsStrategy unitConstantsStrategy;
+    private int moveCount;
 
     public UnitImpl(Player player, String typeString, UnitConstantsStrategy unitConstantsStrategy){
         this.player = player;
@@ -41,7 +42,9 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getMoveCount() {
-        return 0;
+        if(movable){
+            return 1;
+        } else return 0;
     }
 
     @Override
@@ -78,4 +81,5 @@ public class UnitImpl implements Unit {
     public void setMovalbe(boolean movable){
         this.movable = movable;
     }
+
 }

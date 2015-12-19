@@ -27,7 +27,7 @@ public class TestZetaCiv {
     private BattleOutcomeStrategy battleOutcomeStrategy;
 
     @Before
-    public void setup(){
+    public void setup() {
         battleOutcomeStrategy = new EpsilonCivBattleOutcomeStrategy(dieStrategy);
         winnerStrategy = new ZetaCivWinnerStrategy(new BetaCivWinnerStrategy(),
                 new EpsilonCivWinnerStrategy());
@@ -36,13 +36,13 @@ public class TestZetaCiv {
     }
 
     @Test
-    public void redLegionConquersAllCitiesBefore20Rounds(){
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
+    public void redLegionConquersAllCitiesBefore20Rounds() {
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position redLegionPosition = new Position(4,0);
+        Position redLegionPosition = new Position(4, 0);
         game.getWorld().setUnitAt(redLegionPosition, redLegion);
 
-        assertThat(game.moveUnit(redLegionPosition, new Position(4,1)), is(true));
+        assertThat(game.moveUnit(redLegionPosition, new Position(4, 1)), is(true));
 
         assertThat(game.getWinner(), is(Player.RED));
 
@@ -50,33 +50,33 @@ public class TestZetaCiv {
     }
 
     @Test
-    public void after20RoundsRedConquersACityAndWinnerIsNull(){
+    public void after20RoundsRedConquersACityAndWinnerIsNull() {
         endOfRounds(20);
 
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Position redLegionPosition = new Position(4,0);
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Position redLegionPosition = new Position(4, 0);
         game.getWorld().setUnitAt(redLegionPosition, redLegion);
 
-        assertThat(game.moveUnit(redLegionPosition, new Position(4,1)), is(true));
+        assertThat(game.moveUnit(redLegionPosition, new Position(4, 1)), is(true));
 
         assertThat(game.getWinner(), is(nullValue()));
     }
 
     @Test
-    public void after20RoundsRedWinsAfterThreeSuccessfulAttacks(){
+    public void after20RoundsRedWinsAfterThreeSuccessfulAttacks() {
         endOfRounds(20);
 
         World world = game.getWorld();
 
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position legionPosition = new Position(5,0);
-        Position settler1Position = new Position(5,1);
-        Position settler2Position = new Position(5,2);
-        Position settler3Position = new Position(5,3);
+        Position legionPosition = new Position(5, 0);
+        Position settler1Position = new Position(5, 1);
+        Position settler2Position = new Position(5, 2);
+        Position settler3Position = new Position(5, 3);
 
         world.setUnitAt(legionPosition, redLegion);
         world.setUnitAt(settler1Position, blueSettler1);
@@ -106,7 +106,7 @@ public class TestZetaCiv {
     }
 
     @Test
-    public void zetaCivWinnerStrategyMakeNewMapWorks(){
+    public void zetaCivWinnerStrategyMakeNewMapWorks() {
         Map<Player, ArrayList<Integer>> oldMap = new HashMap<Player, ArrayList<Integer>>();
 
         oldMap.put(Player.RED, new ArrayList<Integer>());
@@ -121,18 +121,18 @@ public class TestZetaCiv {
     }
 
     @Test
-    public void ifRedWins3AttacksBeforeRound20WinnerInRound22IsNull(){
+    public void ifRedWins3AttacksBeforeRound20WinnerInRound22IsNull() {
         World world = game.getWorld();
 
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position legionPosition = new Position(5,0);
-        Position settler1Position = new Position(5,1);
-        Position settler2Position = new Position(5,2);
-        Position settler3Position = new Position(5,3);
+        Position legionPosition = new Position(5, 0);
+        Position settler1Position = new Position(5, 1);
+        Position settler2Position = new Position(5, 2);
+        Position settler3Position = new Position(5, 3);
 
         world.setUnitAt(legionPosition, redLegion);
         world.setUnitAt(settler1Position, blueSettler1);
@@ -164,18 +164,18 @@ public class TestZetaCiv {
     }
 
     @Test
-    public void ifRedWins3AttacksAfterRound20WinnerRedIsWinner(){
+    public void ifRedWins3AttacksAfterRound20WinnerRedIsWinner() {
         World world = game.getWorld();
 
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position legionPosition = new Position(5,0);
-        Position settler1Position = new Position(5,1);
-        Position settler2Position = new Position(5,2);
-        Position settler3Position = new Position(5,3);
+        Position legionPosition = new Position(5, 0);
+        Position settler1Position = new Position(5, 1);
+        Position settler2Position = new Position(5, 2);
+        Position settler3Position = new Position(5, 3);
 
         world.setUnitAt(legionPosition, redLegion);
         world.setUnitAt(settler1Position, blueSettler1);
@@ -207,10 +207,8 @@ public class TestZetaCiv {
     }
 
 
-
-
-    public void endOfRounds(int rounds){
-        for(int i=0; i<rounds; i++){
+    public void endOfRounds(int rounds) {
+        for (int i = 0; i < rounds; i++) {
             game.endOfTurn();
             game.endOfTurn();
         }

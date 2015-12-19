@@ -77,8 +77,8 @@ public class WorldImpl implements World {
     }
 
     public void setTileAt(Position p, Tile tile){
-        observer.worldChangedAt(p);
         tileLocations.put(p, tile);
+        observer.worldChangedAt(p);
     }
 
     public Map<Position, City> getAllCities() {

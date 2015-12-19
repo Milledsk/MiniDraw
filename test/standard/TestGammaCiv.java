@@ -28,7 +28,7 @@ public class TestGammaCiv {
 
     @Test
     public void redSettlerTurnsIntoRedCityWithPopulationOfOne() {
-        Position settlerPosition = new Position(4,3);
+        Position settlerPosition = new Position(4, 3);
 
         game.performUnitActionAt(settlerPosition);
 
@@ -39,20 +39,20 @@ public class TestGammaCiv {
 
     @Test
     public void redArcherFortifiesWhenActionCalled() {
-        Position archerPosition = new Position(2,0);
+        Position archerPosition = new Position(2, 0);
         Unit archer = game.getUnitAt(archerPosition);
 
         int strength = archer.getDefensiveStrength();
 
         game.performUnitActionAt(archerPosition);
 
-        assertThat(game.getUnitAt(archerPosition).getDefensiveStrength(), is(strength*2));
-        assertThat(game.moveUnit(archerPosition, new Position(2,1)), is(false));
+        assertThat(game.getUnitAt(archerPosition).getDefensiveStrength(), is(strength * 2));
+        assertThat(game.moveUnit(archerPosition, new Position(2, 1)), is(false));
     }
 
     @Test
-    public void redArcherUnfortify(){
-        Position archerPosition = new Position(2,0);
+    public void redArcherUnfortify() {
+        Position archerPosition = new Position(2, 0);
         Unit archer = game.getUnitAt(archerPosition);
         int strength = archer.getDefensiveStrength();
 
@@ -62,7 +62,7 @@ public class TestGammaCiv {
         game.performUnitActionAt(archerPosition);
 
         assertThat(game.getUnitAt(archerPosition).getDefensiveStrength(), is(strength));
-        assertThat(game.moveUnit(archerPosition, new Position(2,1)), is(true));
+        assertThat(game.moveUnit(archerPosition, new Position(2, 1)), is(true));
 
     }
 

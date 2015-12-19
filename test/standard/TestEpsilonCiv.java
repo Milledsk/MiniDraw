@@ -20,20 +20,20 @@ public class TestEpsilonCiv {
     private DieStrategy dieStrategy = new SetDieStrategy();
 
     @Before
-    public void setup(){
+    public void setup() {
         game = new GameImpl(new EpsilonCivFactory(new SetDieStrategy()));
     }
 
     @Test
-    public void redLegionAttacksAndConquersBlueSettler(){
+    public void redLegionAttacksAndConquersBlueSettler() {
 
         World world = game.getWorld();
 
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position legionPosition = new Position(5,1);
-        Position settlerPosition = new Position(5,0);
+        Position legionPosition = new Position(5, 1);
+        Position settlerPosition = new Position(5, 0);
 
         world.setUnitAt(settlerPosition, blueSettler);
         world.setUnitAt(legionPosition, redLegion);
@@ -44,15 +44,15 @@ public class TestEpsilonCiv {
     }
 
     @Test
-    public void redArcherAttacksAndConquersBlueLegion(){
+    public void redArcherAttacksAndConquersBlueLegion() {
 
         World world = game.getWorld();
 
-        Unit redArcher = new UnitImpl(Player.RED, GameConstants.ARCHER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redArcher = new UnitImpl(Player.RED, GameConstants.ARCHER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position archerPosition = new Position(5,1);
-        Position legionPosition = new Position(5,0);
+        Position archerPosition = new Position(5, 1);
+        Position legionPosition = new Position(5, 0);
 
         ((WorldImpl) world).setCityAt(archerPosition, new CityImpl(Player.RED));
 
@@ -65,20 +65,20 @@ public class TestEpsilonCiv {
     }
 
     @Test
-    public void blueLegionWithTwoFriendlyUnitsAttacksAndCConquersRedArcher(){
+    public void blueLegionWithTwoFriendlyUnitsAttacksAndCConquersRedArcher() {
         World world = game.getWorld();
 
-        Unit blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueFriend1 = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueFriend2 = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit redArcher = new UnitImpl(Player.RED, GameConstants.ARCHER, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueFriend1 = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueFriend2 = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit redArcher = new UnitImpl(Player.RED, GameConstants.ARCHER, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position attackerPosition = new Position(5,5);
-        Position defenderPosition = new Position(4,5);
+        Position attackerPosition = new Position(5, 5);
+        Position defenderPosition = new Position(4, 5);
 
         world.setUnitAt(attackerPosition, blueLegion);
-        world.setUnitAt(new Position(5,4), blueFriend1);
-        world.setUnitAt(new Position(5,6), blueFriend2);
+        world.setUnitAt(new Position(5, 4), blueFriend1);
+        world.setUnitAt(new Position(5, 6), blueFriend2);
         world.setUnitAt(defenderPosition, redArcher);
 
         ((SetDieStrategy) dieStrategy).setDieValue(1);
@@ -90,18 +90,18 @@ public class TestEpsilonCiv {
     }
 
     @Test
-    public void redWinsAfterThreeSuccessfulAttacks(){
+    public void redWinsAfterThreeSuccessfulAttacks() {
         World world = game.getWorld();
 
-        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redLegion = new UnitImpl(Player.RED, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler1 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler2 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueSettler3 = new UnitImpl(Player.BLUE, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position legionPosition = new Position(5,0);
-        Position settler1Position = new Position(5,1);
-        Position settler2Position = new Position(5,2);
-        Position settler3Position = new Position(5,3);
+        Position legionPosition = new Position(5, 0);
+        Position settler1Position = new Position(5, 1);
+        Position settler2Position = new Position(5, 2);
+        Position settler3Position = new Position(5, 3);
 
         world.setUnitAt(legionPosition, redLegion);
         world.setUnitAt(settler1Position, blueSettler1);
@@ -131,14 +131,14 @@ public class TestEpsilonCiv {
     }
 
     @Test
-    public void redSettlerAttacksBlueLegionAndLoses(){
+    public void redSettlerAttacksBlueLegionAndLoses() {
         World world = game.getWorld();
 
-        Unit redSettler = new UnitImpl(Player.RED, GameConstants.SETTLER, ((GameImpl)game).getUnitConstantsStrategy());
-        Unit blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl)game).getUnitConstantsStrategy());
+        Unit redSettler = new UnitImpl(Player.RED, GameConstants.SETTLER, ((GameImpl) game).getUnitConstantsStrategy());
+        Unit blueLegion = new UnitImpl(Player.BLUE, GameConstants.LEGION, ((GameImpl) game).getUnitConstantsStrategy());
 
-        Position settlerPostion = new Position(5,0);
-        Position legionPosition = new Position(5,1);
+        Position settlerPostion = new Position(5, 0);
+        Position legionPosition = new Position(5, 1);
 
         world.setUnitAt(settlerPostion, redSettler);
         world.setUnitAt(legionPosition, blueLegion);
@@ -149,19 +149,19 @@ public class TestEpsilonCiv {
     }
 
     @Test
-    public void hillHasTileTypeStrengthOf2(){
+    public void hillHasTileTypeStrengthOf2() {
         World world = game.getWorld();
         Tile hill = new TileImpl(GameConstants.HILLS);
-        ((WorldImpl)world).setTileAt(new Position(5,5),hill);
+        ((WorldImpl) world).setTileAt(new Position(5, 5), hill);
         EpsilonCivBattleOutcomeStrategy battleOutcomeStrategy = new EpsilonCivBattleOutcomeStrategy(new SetDieStrategy());
 
-        assertThat(battleOutcomeStrategy.tileTypeStrength(new Position(5,5), world), is(2));
+        assertThat(battleOutcomeStrategy.tileTypeStrength(new Position(5, 5), world), is(2));
 
 
     }
 
-    public void endOfRounds(int rounds){
-        for(int i=0; i<rounds; i++){
+    public void endOfRounds(int rounds) {
+        for (int i = 0; i < rounds; i++) {
             game.endOfTurn();
             game.endOfTurn();
         }

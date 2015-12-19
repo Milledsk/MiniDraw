@@ -1,31 +1,26 @@
 package hotciv.tools;
 
-import hotciv.framework.Position;
 import hotciv.framework.Game;
-import hotciv.framework.Unit;
+import hotciv.framework.Position;
 import hotciv.view.GfxConstants;
-import hotciv.view.UnitFigure;
 import minidraw.framework.Drawing;
 import minidraw.framework.DrawingEditor;
-import minidraw.framework.Figure;
 import minidraw.framework.Tool;
 import minidraw.standard.AbstractTool;
 import minidraw.standard.NullTool;
-import minidraw.standard.handlers.DragTracker;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Milledsk on 18-12-2015.
+ * Created by Milledsk on 19-12-2015.
  */
+public class EndOfTurnTool extends AbstractTool implements Tool {
 
-public class SetFocusTool extends AbstractTool implements Tool{
     private final Game game;
     private Tool fChild;
     private Tool cachedNullTool;
 
-    public SetFocusTool(DrawingEditor editor, Game game) {
+    public EndOfTurnTool(DrawingEditor editor, Game game) {
         super(editor);
         this.game = game;
         this.editor = editor;
@@ -37,7 +32,11 @@ public class SetFocusTool extends AbstractTool implements Tool{
         Drawing model = this.editor().drawing();
         model.lock();
 
-        game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
+        if(x >= GfxConstants.TURN_SHIELD_X && x <= GfxConstants.TURN_SHIELD_X + GfxConstants.TILESIZE &&
+                y >= GfxConstants.TURN_SHIELD_Y && y <= GfxConstants.TURN_SHIELD_Y + GfxConstants.TILESIZE){
+            System.out.println("The Shield is pressed");
+            game.endOfTurn();
+        }
 
         this.fChild.mouseDown(e, x, y);
     }

@@ -20,22 +20,22 @@ public class TestDeltaCiv {
     Game game;
 
     @Before
-    public void setup(){
+    public void setup() {
         game = new GameImpl(new DeltaCivFactory());
     }
 
     @Test
-    public void ThereShouldBeARedCityAt8x12(){
-        assertThat(game.getCityAt(new Position(8,12)).getOwner(), is(Player.RED));
+    public void ThereShouldBeARedCityAt8x12() {
+        assertThat(game.getCityAt(new Position(8, 12)).getOwner(), is(Player.RED));
     }
 
     @Test
-    public void ThereShouldBeABlueCityAt4x5(){
-        assertThat(game.getCityAt(new Position(4,5)).getOwner(), is(Player.BLUE));
+    public void ThereShouldBeABlueCityAt4x5() {
+        assertThat(game.getCityAt(new Position(4, 5)).getOwner(), is(Player.BLUE));
     }
 
     @Test
-    public void ThereShouldBeAOceanAt0x0(){
-        assertThat(game.getTileAt(new Position(0,0)).getTypeString(), is(GameConstants.OCEANS));
+    public void ThereShouldBeAOceanAt0x0() {
+        assertThat(game.getTileAt(new Position(0, 0)).getTypeString(), is(GameConstants.OCEANS));
     }
 }

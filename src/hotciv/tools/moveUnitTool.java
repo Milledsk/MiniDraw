@@ -33,6 +33,7 @@ public class MoveUnitTool extends AbstractTool implements Tool {
         fChild = cachedNullTool = new NullTool();
     }
 
+    @Override
     public void mouseDown(MouseEvent e, int x, int y){
         Drawing model = this.editor().drawing();
         model.lock();
@@ -46,10 +47,18 @@ public class MoveUnitTool extends AbstractTool implements Tool {
         }
     }
 
+    @Override
     public void mouseDrag(MouseEvent e, int x, int y){
         fChild.mouseDrag(e, x, y);
     }
 
+    @Override
+    public void mouseMove(MouseEvent e, int x, int y) {
+        fChild.mouseMove(e, x, y);
+    }
+
+
+    @Override
     public void mouseUp(MouseEvent e, int x, int y){
         editor().drawing().unlock();
         boolean movePossible;
@@ -74,7 +83,6 @@ public class MoveUnitTool extends AbstractTool implements Tool {
         fChild = cachedNullTool;
         draggedFigure = null;
     }
-
     private Tool createDragTracker(Figure draggedFigure) {
         return new DragTracker(this.editor(), draggedFigure);
     }

@@ -55,6 +55,8 @@ public class GfxConstants {
   public final static int UNIT_SHIELD_Y = 188;
   public final static int UNIT_COUNT_X = 598;
   public final static int UNIT_COUNT_Y = 256;
+  public final static int UNIT_ICON_X = GfxConstants.UNIT_SHIELD_X - GfxConstants.TILESIZE * 2;
+  public final static int UNIT_ICON_Y = GfxConstants.UNIT_SHIELD_Y;
 
   public static final int CITY_SHIELD_X = 595;
   public static final int CITY_SHIELD_Y = 342;

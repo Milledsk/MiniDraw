@@ -1,7 +1,7 @@
 package hotciv.tools;
 
-import hotciv.framework.Position;
 import hotciv.framework.Game;
+import hotciv.framework.Position;
 import hotciv.framework.Unit;
 import hotciv.view.GfxConstants;
 import hotciv.view.UnitFigure;
@@ -11,21 +11,20 @@ import minidraw.framework.Figure;
 import minidraw.framework.Tool;
 import minidraw.standard.AbstractTool;
 import minidraw.standard.NullTool;
-import minidraw.standard.handlers.DragTracker;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Milledsk on 18-12-2015.
+ * Created by Milledsk on 19-12-2015.
  */
+public class UnitActionTool extends AbstractTool implements Tool {
 
-public class SetFocusTool extends AbstractTool implements Tool{
     private final Game game;
     private Tool fChild;
     private Tool cachedNullTool;
+    private Unit pressedUnit;
 
-    public SetFocusTool(DrawingEditor editor, Game game) {
+    public UnitActionTool(DrawingEditor editor, Game game) {
         super(editor);
         this.game = game;
         this.editor = editor;
@@ -37,9 +36,16 @@ public class SetFocusTool extends AbstractTool implements Tool{
         Drawing model = this.editor().drawing();
         model.lock();
 
-        game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
+        Position pressedPosition = GfxConstants.getPositionFromXY(x,y);
+        pressedUnit = game.getUnitAt(pressedPosition);
 
-        this.fChild.mouseDown(e, x, y);
+                model.findFigure(e.getX(), e.getY());
+
+        if ( pressedUnit != null && e.isShiftDown()) {
+            game.performUnitActionAt(pressedPosition);
+        }
+        fChild.mouseDown(e, x, y);
+
     }
 
     @Override
@@ -56,4 +62,7 @@ public class SetFocusTool extends AbstractTool implements Tool{
     public void mouseUp(MouseEvent e, int x, int y){
         fChild.mouseUp(e, x, y);
     }
+
+
+
 }

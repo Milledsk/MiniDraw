@@ -110,25 +110,18 @@ public class CivDrawing
           unitFigure.addFigureChangeListener(this);
           figureMap.put(unit, unitFigure);
 
-          // also insert in delegate list as it is
-          // this list that is iterated by the
-          // graphics rendering algorithms
           delegate.add(unitFigure);
         }
 
         if ( city != null ) {
-          Player player = city.getOwner();
-          // convert the unit's Position to (x,y) coordinates
+
           Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()),
                   GfxConstants.getYFromRow(p.getRow()) );
-          CityFigure cityFigure =
-                  new CityFigure(city, point);
+          CityFigure cityFigure = new CityFigure(city, point);
           cityFigure.addFigureChangeListener(this);
           cityMap.put(city, cityFigure);
 
-          // also insert in delegate list as it is
-          // this list that is iterated by the
-          // graphics rendering algorithms
+
           delegate.add(cityFigure);
         }
 
@@ -141,6 +134,7 @@ public class CivDrawing
   private ImageFigure turnShieldIcon;
   private ImageFigure unitShieldIcon;
   private AbstractFigure unitCount;
+  private ImageFigure unitIcon;
   private TextFigure ageText;
   private AbstractFigure cityShield;
   private AbstractFigure workForceFocus;
@@ -159,6 +153,7 @@ public class CivDrawing
       new ImageFigure( playerShieldIcon, new Point( GfxConstants.TURN_SHIELD_X, GfxConstants.TURN_SHIELD_Y ) );
     delegate.add(turnShieldIcon);
 
+    delegate.remove(ageText);
     ageText = new TextFigure("Age: " + game.getAge(), new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
     delegate.add(ageText);
 
@@ -169,6 +164,10 @@ public class CivDrawing
     delegate.remove(unitCount);
     unitCount = new ImageFigure(GfxConstants.NOTHING, new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
     delegate.add(unitCount);
+
+    delegate.remove(unitIcon);
+    unitIcon = new ImageFigure(GfxConstants.NOTHING, new Point(GfxConstants.UNIT_ICON_X, GfxConstants.UNIT_ICON_Y));
+    delegate.add(unitIcon);
 
     delegate.remove(cityShield);
     cityShield = new ImageFigure(GfxConstants.NOTHING, new Point(GfxConstants.CITY_SHIELD_X, GfxConstants.CITY_SHIELD_Y));
@@ -195,7 +194,8 @@ public class CivDrawing
     for ( Figure f : figureMap.values() ) {
       delegate.remove(f);
     }
-    defineUnitMap();
+      defineUnitMap();
+      defineIcons();
   }
 
   public void turnEnds(Player nextPlayer, int age) {
@@ -207,17 +207,19 @@ public class CivDrawing
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
 
-    ageText.setText("Age: " + age);
-
+    delegate.remove(ageText);
+    ageText = new TextFigure("Age: " + game.getAge(), new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
+    delegate.add(ageText);
 
   }
 
   public void tileFocusChangedAt(Position position) {
-    System.out.println( "Fake it: tileFocusChangedAt " + position );
 
     Unit unit = game.getUnitAt(position);
     City city = game.getCityAt(position);
     defineIcons();
+
+    //Unit: UnitIcon, PlayerShield and UnitCound
 
     if(unit != null){
       delegate.remove(unitShieldIcon);
@@ -232,8 +234,14 @@ public class CivDrawing
       unitCount = new TextFigure("" + unit.getMoveCount(), new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
       delegate.add(unitCount);
 
+      delegate.remove(unitIcon);
+      unitIcon = new ImageFigure(unit.getTypeString(), new Point(GfxConstants.UNIT_ICON_X, GfxConstants.UNIT_ICON_Y));
+      delegate.add(unitIcon);
+
 
     }
+
+    //City: PlayerShield, WorkforceFocus and cityProduction.
 
     if(city != null){
       delegate.remove(cityShield);
@@ -244,7 +252,6 @@ public class CivDrawing
       }
       delegate.add(cityShield);
 
-
       delegate.remove(workForceFocus);
       workForceFocus = new ImageFigure(city.getWorkforceFocus(), new Point(GfxConstants.WORKFORCEFOCUS_X, GfxConstants.WORKFORCEFOCUS_Y));
       delegate.add(workForceFocus);
@@ -253,7 +260,6 @@ public class CivDrawing
       cityProduction = new ImageFigure(city.getProduction(), new Point(GfxConstants.CITY_PRODUCTION_X, GfxConstants.CITY_PRODUCTION_Y));
       delegate.add(cityProduction);
     }
-
 
   }
 

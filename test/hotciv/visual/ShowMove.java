@@ -2,19 +2,11 @@ package hotciv.visual;
 
 import hotciv.standard.GameImpl;
 import hotciv.standard.factories.AlphaCivFactory;
-import hotciv.standard.factories.SemiCivFactory;
-import hotciv.standard.strategies.randomDieStrategy;
 import hotciv.tools.MoveUnitTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
 import hotciv.framework.*;
-import hotciv.view.*;
-import hotciv.stub.*;
 
 /** Template code for exercise FRS 36.39.
 

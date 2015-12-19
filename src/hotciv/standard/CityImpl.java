@@ -38,7 +38,7 @@ public class CityImpl implements City {
 
     @Override
     public String getWorkforceFocus() {
-        return null;
+        return GameConstants.foodFocus;
     }
 
     public int getProductionTreasury(){

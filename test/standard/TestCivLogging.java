@@ -25,7 +25,7 @@ public class TestCivLogging {
 
 
     @Before
-    public void setup(){
+    public void setup() {
         gameImpl = new GameImpl(new AlphaCivFactory());
         gameTranscriptDecorator = new GameTranscriptDecorator(gameImpl);
         game = gameTranscriptDecorator;
@@ -33,9 +33,9 @@ public class TestCivLogging {
     }
 
     @Test
-    public void logMoveUnitFrom (){
-        Position from = new Position(2,0);
-        Position to = new Position(2,1);
+    public void logMoveUnitFrom() {
+        Position from = new Position(2, 0);
+        Position to = new Position(2, 1);
         game.moveUnit(from, to);
         Unit u = game.getUnitAt(from);
         assertThat(u, is(nullValue()));
@@ -45,35 +45,35 @@ public class TestCivLogging {
 
 
     @Test
-    public void logChangeProduction(){
-        game.changeProductionInCityAt(new Position(1,1), GameConstants.ARCHER);
+    public void logChangeProduction() {
+        game.changeProductionInCityAt(new Position(1, 1), GameConstants.ARCHER);
     }
 
     @Test
-    public void logEndOfTurn(){
+    public void logEndOfTurn() {
         game.endOfTurn();
     }
 
     @Test
-    public void logPerformUnitAction(){
-        game.performUnitActionAt(new Position(2,0));
+    public void logPerformUnitAction() {
+        game.performUnitActionAt(new Position(2, 0));
     }
 
     @Test
-    public void logPerformUnitActionAndDoNotLogEndOfTurn(){
-        game.performUnitActionAt(new Position(2,0));
+    public void logPerformUnitActionAndDoNotLogEndOfTurn() {
+        game.performUnitActionAt(new Position(2, 0));
         game = gameImpl;
         game.endOfTurn();
     }
+
     @Test
-    public void switchLoggingOnOffAndOn(){
-        game.performUnitActionAt(new Position(2,0));
+    public void switchLoggingOnOffAndOn() {
+        game.performUnitActionAt(new Position(2, 0));
         game = gameImpl;
         game.endOfTurn();
         game = gameTranscriptDecorator;
-        game.changeProductionInCityAt(new Position(1,1), GameConstants.SETTLER);
+        game.changeProductionInCityAt(new Position(1, 1), GameConstants.SETTLER);
     }
-
 
 
 }

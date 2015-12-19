@@ -1,5 +1,8 @@
 package hotciv.visual;
 
+import hotciv.standard.GameImpl;
+import hotciv.standard.factories.AlphaCivFactory;
+import hotciv.tools.EndOfTurnTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
 
@@ -30,7 +33,7 @@ import hotciv.stub.*;
 public class ShowEndOfTurn {
   
   public static void main(String[] args) {
-    Game game = new StubGame2();
+    Game game = new GameImpl(new AlphaCivFactory());
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Click top shield to end the turn",  
@@ -39,6 +42,6 @@ public class ShowEndOfTurn {
     editor.showStatus("Click to shield to see Game's endOfTurn method being called.");
 
     // Replace the setting of the tool with your EndOfTurnTool implementation.
-    editor.setTool( new NullTool() );
+    editor.setTool( new EndOfTurnTool(editor, game));
   }
 }

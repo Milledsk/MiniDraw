@@ -21,7 +21,7 @@ public class TestObserver {
     GameObserver gameObserver = new GameObserverImpl();
 
     @Before
-    public void setup(){
+    public void setup() {
         game = new GameImpl(new AlphaCivFactory());
         world = game.getWorld();
 
@@ -29,10 +29,10 @@ public class TestObserver {
 
     //WorldChangedAt tests
     @Test
-    public void aUnitIsPlacedAt5x5(){
+    public void aUnitIsPlacedAt5x5() {
         Unit unit = new UnitImpl(Player.RED, GameConstants.ARCHER, new AlphaCivUnitConstantsStrategy());
-        Position from = new Position(5,5);
-        Position to = new Position(5,6);
+        Position from = new Position(5, 5);
+        Position to = new Position(5, 6);
 
         game.addObserver(new GameObserver() {
             int worldTest = 0;
@@ -40,13 +40,13 @@ public class TestObserver {
 
             @Override
             public void worldChangedAt(Position pos) {
-                if(worldTest == 0){
+                if (worldTest == 0) {
                     worldTest++;
                     assertThat("world has changed at 5x5)", pos, is(from));
-                }else if(worldTest == 1){
+                } else if (worldTest == 1) {
                     worldTest++;
                     assertThat("world has changed at 5x5)", pos, is(from));
-                } else{
+                } else {
                     assertThat("world has changed at 5x6)", pos, is(to));
                 }
 
@@ -54,10 +54,10 @@ public class TestObserver {
 
             @Override
             public void turnEnds(Player nextPlayer, int age) {
-                if(turnTest == 0){
+                if (turnTest == 0) {
                     assertThat(game.getPlayerInTurn(), is(Player.BLUE));
                     turnTest++;
-                } else if(turnTest == 1){
+                } else if (turnTest == 1) {
                     assertThat(game.getPlayerInTurn(), is(Player.RED));
                     turnTest = 0;
                 }

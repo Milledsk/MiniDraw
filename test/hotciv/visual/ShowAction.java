@@ -1,5 +1,8 @@
 package hotciv.visual;
 
+import hotciv.standard.GameImpl;
+import hotciv.standard.factories.AlphaCivFactory;
+import hotciv.tools.UnitActionTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
 
@@ -30,7 +33,7 @@ import hotciv.stub.*;
 public class ShowAction {
   
   public static void main(String[] args) {
-    Game game = new StubGame2();
+    Game game = new GameImpl(new AlphaCivFactory());
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Shift-Click unit to invoke its action",  
@@ -39,6 +42,6 @@ public class ShowAction {
     editor.showStatus("Shift-Click on unit to see Game's performAction method being called.");
 
     // Replace the setting of the tool with your ActionTool implementation.
-    editor.setTool( new NullTool() );
+    editor.setTool( new UnitActionTool(editor, game) );
   }
 }

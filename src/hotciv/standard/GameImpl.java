@@ -175,6 +175,7 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt(Position p) {
+        System.out.println("unitAction called");
 
         actionStrategy.performUnitAction(this, p);
     }
